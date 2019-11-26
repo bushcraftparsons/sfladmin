@@ -1,0 +1,11 @@
+version: "3.7"
+services:
+  sflogadmin:
+    container_name: sflogadmin
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/app'
+    ports:
+      - '6060:6060'
