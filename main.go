@@ -41,5 +41,5 @@ func main() {
 
 	// start server listen
 	// with error handling
-	log.Fatal(http.ListenAndServe(":6060", handlers.CORS(originsOk, headersOk, methodsOk)(router))) //Launch the app, visit localhost:6060/api
+	log.Fatal(http.ListenAndServeTLS(":6060", "apiserver.crt", "apiserver.key", handlers.CORS(originsOk, headersOk, methodsOk)(router))) //Launch the app, visit https://localhost:6060/api
 }
