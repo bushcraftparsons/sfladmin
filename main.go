@@ -33,7 +33,7 @@ func main() {
 	router.Use(app.JwtAuthentication) //attach JWT auth middleware
 	router.HandleFunc("/", homeLink).Methods("GET")
 	router.HandleFunc("/listAdmin", controllers.ListAdmin).Methods("GET")
-	router.HandleFunc("/login", controllers.Authenticate).Methods("POST")
+	router.HandleFunc("/runShell", controllers.RunShell).Methods("POST")
 
 	headersOk := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization", "Accept", "Origin", "Referer", "Sec-Fetch-Mode", "User-Agent"})
 	originsOk := handlers.AllowedOrigins([]string{"*", "http://localhost:3001", "https://sflog.formyer.com", "http://86.184.53.15:3001"})

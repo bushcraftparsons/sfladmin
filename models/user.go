@@ -55,6 +55,15 @@ func VerifyUser(email string) (int, error) {
 	return user.ID, nil
 }
 
+func VerifyAdmin(email string) (int, error) {
+	user := User{}
+	GetDB().Table("users").Where("email = ? and is_admin = true", email).First(&user)
+	if user.Email == "" { //User not found!
+		return 0, fmt.Errorf("User not found: %s", email)
+	}
+	return user.ID, nil
+}
+
 //TestDB is for testing the database
 func TestDB(email string) {
 	user := User{}

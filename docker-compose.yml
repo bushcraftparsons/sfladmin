@@ -1,3 +1,5 @@
+#Note that sfladmin needs to run on the host, not in a docker container, as it runs some shell scripts
+#That makes this docker compose redundant, but left here for testing purposes.
 version: "3.7"
 services:
   sflogadmin:
