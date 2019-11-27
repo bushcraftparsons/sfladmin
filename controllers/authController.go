@@ -27,10 +27,10 @@ var RunShell = func(w http.ResponseWriter, r *http.Request) {
 		u.Respond(w, u.Message(false, "Failed to get user context"))
 	}
 	email := claimSet.Email
-	userid, err := models.VerifyAdmin(email)
+	_, err := models.VerifyAdmin(email)
 	if err != nil { //User not admin, returns with http code 403 as usual
 		fmt.Println("User not admin", err)
-		response = u.Message(false, "User not admin")
+		response := u.Message(false, "User not admin")
 		w.WriteHeader(http.StatusForbidden)
 		w.Header().Add("Content-Type", "application/json")
 		u.Respond(w, response)
@@ -50,7 +50,7 @@ var RunShell = func(w http.ResponseWriter, r *http.Request) {
 			if err != nil {
 				log.Fatal(err)
 			}
-			u.Respond(w, u.Message(true, fmt.Printf("output is %s\n", out)))
+			u.Respond(w, u.Message(true, fmt.Sprintf("output is %s\n", out)))
 		}
 	}
 }
