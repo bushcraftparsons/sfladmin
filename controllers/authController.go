@@ -46,7 +46,7 @@ var RunShell = func(w http.ResponseWriter, r *http.Request) {
 			u.Respond(w, u.Message(false, "Failed decoding to filename struct"))
 			return
 		} else {
-			out, err := exec.Command(fileName.Name).Output()
+			out, err := exec.Command(fmt.Sprintf("scripts/%s", fileName.Name)).Output()
 			if err != nil {
 				log.Fatal(err)
 			}
