@@ -36,7 +36,7 @@ func main() {
 	router.HandleFunc("/runShell", controllers.RunShell).Methods("POST")
 
 	headersOk := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization", "Accept", "Origin", "Referer", "Sec-Fetch-Mode", "User-Agent"})
-	originsOk := handlers.AllowedOrigins([]string{"*", "http://localhost:3001", "https://sflog.formyer.com", "http://86.184.53.15:3001"})
+	originsOk := handlers.AllowedOrigins([]string{"*", "http://localhost:3001", "https://sfl.formyer.com", "http://86.184.53.15:3001"})
 	methodsOk := handlers.AllowedMethods([]string{"GET", "HEAD", "POST", "PUT", "OPTIONS"})
 
 	// start server listen
