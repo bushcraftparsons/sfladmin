@@ -27,7 +27,15 @@ var RunShell = func(w http.ResponseWriter, r *http.Request) {
 		u.Respond(w, u.Message(false, "Failed to get user context"))
 	}
 	email := claimSet.Email
-	if models.VerifyAdmin(email) {
+	userid, err := models.VerifyAdmin(email)
+	if err != nil { //User not admin, returns with http code 403 as usual
+		fmt.Println("User not admin", err)
+		response = u.Message(false, "User not admin")
+		w.WriteHeader(http.StatusForbidden)
+		w.Header().Add("Content-Type", "application/json")
+		u.Respond(w, response)
+		return
+	} else {
 		//User is admin, get the name of the shell script and run it
 		fileName := &FileName{}
 
@@ -44,10 +52,7 @@ var RunShell = func(w http.ResponseWriter, r *http.Request) {
 			}
 			u.Respond(w, u.Message(true, fmt.Printf("output is %s\n", out)))
 		}
-	} else {
-		u.Respond(w, u.Message(false, fmt.Printf("User is not admin %s", email)))
 	}
-	u.Respond(w, resp)
 }
 
 //ListAdmin lists all the administrators
